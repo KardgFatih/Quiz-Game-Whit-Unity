@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 401462552}
   - component: {fileID: 401462551}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Question Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1728,3 +1728,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952394159}
   m_CullTransparentMesh: 1
+--- !u!1 &2078747860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078747862}
+  - component: {fileID: 2078747861}
+  m_Layer: 0
+  m_Name: Question Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2078747861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078747860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af13b1e2b516f904092a991b0f756e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionsDatas: {fileID: 11400000, guid: e25e6493735ec6a4c9842efdb5cf5afd, type: 2}
+  questionText: {fileID: 401462551}
+  answersText:
+  - {fileID: 727378210}
+  - {fileID: 1240660169}
+  - {fileID: 60545045}
+  - {fileID: 1548159002}
+  currenntQuestionID: 0
+--- !u!4 &2078747862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078747860}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1033.666, y: 514.06934, z: 8.208568}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
