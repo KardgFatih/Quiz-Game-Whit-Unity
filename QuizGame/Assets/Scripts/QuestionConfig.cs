@@ -7,7 +7,8 @@ using System.Linq;
 
 public class QuestionConfig : MonoBehaviour
 {   
-    [SerializeField] private QuestionsDatas questionsDatas; 
+    [SerializeField] private QuestionsDatas questionsDatas;
+    [SerializeField] private Questions currentQuestion;
     [SerializeField] private TextMeshProUGUI questionText;
     //ID = 0 => The text of the answer_1 button, ID = 1 => The text of the answer_2 button ...
     [SerializeField] private TextMeshProUGUI[] answersText;
@@ -30,17 +31,19 @@ public class QuestionConfig : MonoBehaviour
         }
     }
 
-    public void ConfigNextQuestion()
+    private void ConfigNextQuestion()
     {
-        if (questionsDatas.questionintheEpisode[currenntQuestionID] != null)
+        currentQuestion = questionsDatas.questionintheEpisode[currenntQuestionID];
+
+        if (currentQuestion != null)
         {
             // Sahnedeki = textimiz scriptabledeki text
-            questionText.text = questionsDatas.questionintheEpisode[currenntQuestionID].questionText;
+            questionText.text = currentQuestion.questionText;
 
             // s
-            for (int i = 0; i < questionsDatas.questionintheEpisode[currenntQuestionID].answer.Length ; ++i)
+            for (int i = 0; i < currentQuestion.answer.Length ; ++i)
             {
-                answersText[i].text = questionsDatas.questionintheEpisode[currenntQuestionID].answer[i];
+                answersText[i].text = currentQuestion.answer[i];
             }
         }
         else
@@ -49,8 +52,22 @@ public class QuestionConfig : MonoBehaviour
         }
     }
 
-    public void MixOrder()
+    private void MixOrder()
     {
         questionsDatas.questionintheEpisode = questionsDatas.questionintheEpisode.OrderBy(i => Random.value).ToList();
+    }
+
+    public void CheckAnswer(int _givenAnswer)
+    {
+        if (_givenAnswer == currentQuestion.corretAnswerID)
+        {
+            //True Answer
+            print("True Answer");
+        }
+        else
+        {
+            //False Answer
+            print("False Answer");
+        }
     }
 }
