@@ -13,16 +13,23 @@ MonoBehaviour:
   m_Name: New Question
   m_EditorClassIdentifier: 
   questionintheEpisode:
-  - <questionText>k__BackingField: sa
+  - <questionText>k__BackingField: "T\xFCrkiye'nin ba\u015Fkenti?"
     <answer>k__BackingField:
-    - a
-    - b
-    - c
-    - d
+    - Ankara
+    - "\u0130stanbul"
+    - Bursa
+    - "Kur\u015Funlu"
     <corretAnswerID>k__BackingField: 0
   - <questionText>k__BackingField: as
     <answer>k__BackingField:
     - d
+    - c
+    - b
+    - a
+    <corretAnswerID>k__BackingField: 0
+  - <questionText>k__BackingField: nbr
+    <answer>k__BackingField:
+    - ii
     - c
     - b
     - a
