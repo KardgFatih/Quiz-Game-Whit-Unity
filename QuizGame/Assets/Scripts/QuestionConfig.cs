@@ -32,14 +32,6 @@ public class QuestionConfig : MonoBehaviour
         ConfigQuestion();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            currenntQuestionID += 1;
-            StartCoroutine(NextQuestion(0.9f));
-        }
-    }
     void NextQuestion()
     {
         print(questionsDatas.questionintheEpisode.Count);
@@ -49,16 +41,7 @@ public class QuestionConfig : MonoBehaviour
             ConfigQuestion();
         }
         else
-        {
             finishPanel.SetActive(true);
-        }
-    }
-
-    IEnumerator NextQuestion(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        currenntQuestionID += 1;
-        ConfigQuestion();
     }
 
     private void ConfigQuestion()
@@ -90,20 +73,12 @@ public class QuestionConfig : MonoBehaviour
         questionsDatas.questionintheEpisode = questionsDatas.questionintheEpisode.OrderBy(i => Random.value).ToList();
     }
 
-    float timer;
     IEnumerator CorrectOrNotPng(float delay,GameObject obj)
     {
         obj.SetActive(true);
         yield return new WaitForSeconds(delay);
         obj.SetActive(false);
         NextQuestion();
-    }
-
-    IEnumerator WorseAnswer(float delay,GameObject obj)
-    {
-        yield return new WaitForSeconds(delay);
-        currenntQuestionID += 1;
-        ConfigQuestion();
     }
 
     // You should give this function to the answer buttons with the answer IDs.
