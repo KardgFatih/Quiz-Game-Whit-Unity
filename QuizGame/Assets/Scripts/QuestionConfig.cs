@@ -7,7 +7,10 @@ using System.Linq;
 using UnityEngine.UI;
 
 public class QuestionConfig : MonoBehaviour
-{   
+{
+    [SerializeField] GameObject soundManager;
+    private AudioMng audioMng;
+
     [SerializeField] private QuestionsDatas questionsDatas;
     [SerializeField] private Questions currentQuestion;
     [SerializeField] private TextMeshProUGUI questionText;
@@ -15,12 +18,16 @@ public class QuestionConfig : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] answersText;
 
     [SerializeField] private GameObject currectObject, worseObject;
+    [SerializeField] private GameObject finishPanel;
 
     // questions[selectedID].QuestionsDatas = questions[selectedID].QuestionsDatas.OrderBy(i => Random.value).ToList();
-    public int currenntQuestionID;
+    private int currenntQuestionID;
 
     void Start()
     {
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager");
+        audioMng = soundManager.GetComponent<AudioMng>();
+
         MixOrder();
         ConfigQuestion();
     }
@@ -35,8 +42,16 @@ public class QuestionConfig : MonoBehaviour
     }
     void NextQuestion()
     {
-        currenntQuestionID += 1;
-        ConfigQuestion();
+        print(questionsDatas.questionintheEpisode.Count);
+        if (questionsDatas.questionintheEpisode.Count-1 != currenntQuestionID )
+        {
+            currenntQuestionID += 1;
+            ConfigQuestion();
+        }
+        else
+        {
+            finishPanel.SetActive(true);
+        }
     }
 
     IEnumerator NextQuestion(float delay)
@@ -76,7 +91,7 @@ public class QuestionConfig : MonoBehaviour
     }
 
     float timer;
-    IEnumerator CorrectOrNot(float delay,GameObject obj)
+    IEnumerator CorrectOrNotPng(float delay,GameObject obj)
     {
         obj.SetActive(true);
         yield return new WaitForSeconds(delay);
@@ -97,14 +112,16 @@ public class QuestionConfig : MonoBehaviour
         if (_givenAnswer == currentQuestion.corretAnswerID)
         {
             //True Answer
+            audioMng.PlayCorrectSoundEfect();
             print("True Answer");
-            StartCoroutine(CorrectOrNot(1f, currectObject));
+            StartCoroutine(CorrectOrNotPng(1f, currectObject));
         }
         else
         {
             //False Answer
+            audioMng.PlayWrongtSoundEfect();
             print("False Answer");
-            StartCoroutine(CorrectOrNot(1f, worseObject));
+            StartCoroutine(CorrectOrNotPng(1f, worseObject));
         }
     }
 }
