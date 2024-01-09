@@ -78,22 +78,9 @@ public class QuestionConfig : MonoBehaviour
     float timer;
     IEnumerator CorrectOrNot(float delay,GameObject obj)
     {
-        //obj.
-        //timer = 0;
-       /* while (true)
-        {
-            timer += Time.deltaTime;
-        }*/
-        
-
-        yield return new WaitForSeconds(delay/2);
-        print("sa");
-        for (int i = 0; i > 0; --i)
-        {
-
-        }
+        obj.SetActive(true);
+        yield return new WaitForSeconds(delay);
         obj.SetActive(false);
-        yield return new WaitForSeconds(delay / 2);
         NextQuestion();
     }
 
