@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Question", menuName = "Questions")]
 public class QuestionsDatas : ScriptableObject
 {
-    public List<Questions> questionintheEpisode;
+    public List<Questions> questionList;
 }
 
 [Serializable]

@@ -11,13 +11,14 @@ public class AudioMng : MonoBehaviour
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>(); // Gets the AudioSource compennet in the object
     }
 
-    public void PlayCorrectSoundEfect()
+    public void PlayCorrectSoundEfect() 
     {
         audioSource.PlayOneShot(correctSound);
     }
+
     public void PlayWrongtSoundEfect()
     {
         audioSource.PlayOneShot(WrongSound);
