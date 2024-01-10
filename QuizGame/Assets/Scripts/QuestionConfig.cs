@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using System.ComponentModel;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 
 public class QuestionConfig : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class QuestionConfig : MonoBehaviour
     [SerializeField] private Questions currentQuestion; // Class of scriptable object 
     [SerializeField] private TextMeshProUGUI questionText; // Text in which the question is written
     //ID = 0 => The text of the answer_1 button, ID = 1 => The text of the answer_2 button ...
+    [SerializeField] private Button[] answerButton;
     [SerializeField] private TextMeshProUGUI[] answersText;// Text in which the answers is written
 
     [SerializeField] private GameObject currectObject, worseObject; // Visual effects to show whether the answer is right or wrong
@@ -25,11 +27,16 @@ public class QuestionConfig : MonoBehaviour
 
     // questions[selectedID].QuestionsDatas = questions[selectedID].QuestionsDatas.OrderBy(i => Random.value).ToList();
     private int currenntQuestionID;
-
+    private bool canAnswer = true;
 
     //There should be an object tagged "SoundManager" in the scene and an AudioMng component inside it.
     void Start()
     {
+        for (int i = 0; i < answerButton.Length; i++)
+        {
+            answersText[i] = answerButton[i].GetComponentInChildren<TextMeshProUGUI>();
+        }
+
         soundManager = GameObject.FindGameObjectWithTag("SoundManager"); // Finds the object tagged "SoundManager" in the scene
         audioMng = soundManager.GetComponent<AudioMng>(); // Gets the Audio Mng component from within that object
 
@@ -76,10 +83,16 @@ public class QuestionConfig : MonoBehaviour
     //Activates the right object or the wrong object, waits for a while, deactivates the object and brings up a new question
     IEnumerator CorrectOrNotPng(float delay,GameObject obj) 
     {
+        for (int i = 0; i < answerButton.Length; i++) // Prevents you from answering follow-up questions before they come up
+            answerButton[i].interactable = false; // Disables answering the question
+
         obj.SetActive(true);
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay); // waits until delay
         obj.SetActive(false);
-        NextQuestion();
+        NextQuestion(); // Moves to next question
+
+        for (int i = 0; i < answerButton.Length; i++)
+            answerButton[i].interactable = true; // Enables answering the question
     }
 
     // You should give this function to the answer buttons with the answer IDs.
@@ -91,14 +104,14 @@ public class QuestionConfig : MonoBehaviour
             //True Answer
             audioMng.PlayCorrectSoundEfect();// Play correct sound efect
             print("True Answer");
-            StartCoroutine(CorrectOrNotPng(1f, currectObject));
+            StartCoroutine(CorrectOrNotPng(0.9f, currectObject));
         }
         else
         {
             //False Answer
             audioMng.PlayWrongtSoundEfect(); // Play wrong sound efect
             print("False Answer");
-            StartCoroutine(CorrectOrNotPng(1f, worseObject));
+            StartCoroutine(CorrectOrNotPng(0.9f, worseObject));
         }
     }
 }

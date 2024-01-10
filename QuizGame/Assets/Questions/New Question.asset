@@ -12,32 +12,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205b19a26d1a6d64db2f2d620baaadb6, type: 3}
   m_Name: New Question
   m_EditorClassIdentifier: 
-  questionintheEpisode:
-  - <questionText>k__BackingField: as
+  questionList:
+  - <questionText>k__BackingField: Who is the author of the play "Romeo and Juliet"?
     <answer>k__BackingField:
-    - d
-    - c
-    - b
-    - a
+    - Charles Dickens
+    - William Shakespeare
+    - Jane Austen
+    - Fyodor Dostoyevsky
+    <corretAnswerID>k__BackingField: 1
+  - <questionText>k__BackingField: In which city is Leonardo da Vinci's famous painting
+      "Mona Lisa" exhibited?
+    <answer>k__BackingField:
+    - Paris
+    - Rome
+    - Florence
+    - Madrid
     <corretAnswerID>k__BackingField: 0
-  - <questionText>k__BackingField: "T\xFCrkiye'nin ba\u015Fkenti?"
+  - <questionText>k__BackingField: On which planet is a day longer than a day on
+      Earth?
     <answer>k__BackingField:
-    - Ankara
-    - "\u0130stanbul"
-    - Bursa
-    - "Kur\u015Funlu"
-    <corretAnswerID>k__BackingField: 0
-  - <questionText>k__BackingField: 42-11
-    <answer>k__BackingField:
-    - 29
-    - 30
-    - 31
-    - 32
+    - Saturn
+    - Jupiter
+    - Venus
+    - Neptune
     <corretAnswerID>k__BackingField: 2
-  - <questionText>k__BackingField: nbr
+  - <questionText>k__BackingField: Where is the capital of Turkey
     <answer>k__BackingField:
-    - ii
-    - c
-    - b
-    - a
+    - Bursa
+    - "\u0130stanbul"
+    - Ankara
+    - Mugla
+    <corretAnswerID>k__BackingField: 2
+  - <questionText>k__BackingField: Which planet is third in the Solar System?
+    <answer>k__BackingField:
+    - ' Mars'
+    - Jupiter
+    - Earth
+    - Venus
+    <corretAnswerID>k__BackingField: 2
+  - <questionText>k__BackingField: Who is the youngest person to receive the Nobel
+      Peace Prize?
+    <answer>k__BackingField:
+    - Malala Yousafzai
+    - Martin Luther King Jr.
+    - Nelson Mandela
+    - Mother Teresa
     <corretAnswerID>k__BackingField: 0
+  - <questionText>k__BackingField: What is the Capital of Germany?
+    <answer>k__BackingField:
+    - Hamburg
+    - Berlin
+    - Munih
+    - Koln
+    <corretAnswerID>k__BackingField: 1
