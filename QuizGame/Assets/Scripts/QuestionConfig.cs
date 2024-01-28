@@ -5,10 +5,6 @@ using TMPro;
 using System.Data;
 using System.Linq;
 using UnityEngine.UI;
-using System.ComponentModel;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 
 public class QuestionConfig : MonoBehaviour
 {
@@ -27,15 +23,15 @@ public class QuestionConfig : MonoBehaviour
 
     // questions[selectedID].QuestionsDatas = questions[selectedID].QuestionsDatas.OrderBy(i => Random.value).ToList();
     private int currenntQuestionID;
-    private bool canAnswer = true;
 
+    public int numberofCorrectAnswer, numberofWrongAnswer;
     //There should be an object tagged "SoundManager" in the scene and an AudioMng component inside it.
     void Start()
     {
-        for (int i = 0; i < answerButton.Length; i++)
-        {
+        numberofCorrectAnswer = 0;
+        numberofWrongAnswer = 0;
+        for (int i = 0; i < answerButton.Length; ++i)
             answersText[i] = answerButton[i].GetComponentInChildren<TextMeshProUGUI>();
-        }
 
         soundManager = GameObject.FindGameObjectWithTag("SoundManager"); // Finds the object tagged "SoundManager" in the scene
         audioMng = soundManager.GetComponent<AudioMng>(); // Gets the Audio Mng component from within that object
@@ -65,12 +61,9 @@ public class QuestionConfig : MonoBehaviour
             // Question text in the scene = questionText in scriptableobject
             questionText.text = currentQuestion.questionText;
 
-            
             for (int i = 0; i < currentQuestion.answer.Length ; ++i)
-            {
                 // Buttons text = answer text in scriptableobject
                 answersText[i].text = currentQuestion.answer[i];
-            }
         }
     }
 
@@ -81,9 +74,9 @@ public class QuestionConfig : MonoBehaviour
     }
 
     //Activates the right object or the wrong object, waits for a while, deactivates the object and brings up a new question
-    IEnumerator CorrectOrNotPng(float delay,GameObject obj) 
+    IEnumerator CheckTheQuestionAndMovesToNextOne(float delay,GameObject obj) 
     {
-        for (int i = 0; i < answerButton.Length; i++) // Prevents you from answering follow-up questions before they come up
+        for (int i = 0; i < answerButton.Length; ++i) // Prevents you from answering follow-up questions before they come up
             answerButton[i].interactable = false; // Disables answering the question
 
         obj.SetActive(true);
@@ -91,7 +84,7 @@ public class QuestionConfig : MonoBehaviour
         obj.SetActive(false);
         NextQuestion(); // Moves to next question
 
-        for (int i = 0; i < answerButton.Length; i++)
+        for (int i = 0; i < answerButton.Length; ++i)
             answerButton[i].interactable = true; // Enables answering the question
     }
 
@@ -103,15 +96,17 @@ public class QuestionConfig : MonoBehaviour
         {
             //True Answer
             audioMng.PlayCorrectSoundEfect();// Play correct sound efect
+            numberofCorrectAnswer += 1;
             print("True Answer");
-            StartCoroutine(CorrectOrNotPng(0.9f, currectObject));
+            StartCoroutine(CheckTheQuestionAndMovesToNextOne(0.9f, currectObject));
         }
         else
         {
             //False Answer
             audioMng.PlayWrongtSoundEfect(); // Play wrong sound efect
+            numberofWrongAnswer += 1;
             print("False Answer");
-            StartCoroutine(CorrectOrNotPng(0.9f, worseObject));
+            StartCoroutine(CheckTheQuestionAndMovesToNextOne(0.9f, worseObject));
         }
     }
 }

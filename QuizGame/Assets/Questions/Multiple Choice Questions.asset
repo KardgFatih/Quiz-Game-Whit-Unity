@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 205b19a26d1a6d64db2f2d620baaadb6, type: 3}
-  m_Name: New Question
+  m_Name: Multiple Choice Questions
   m_EditorClassIdentifier: 
   questionList:
   - <questionText>k__BackingField: Who is the author of the play "Romeo and Juliet"?
